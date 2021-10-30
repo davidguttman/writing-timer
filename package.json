@@ -18,11 +18,13 @@
     "terser": "^5.9.0"
   },
   "dependencies": {
+    "@dguttman/calendar-heatmap": "^1.0.0",
     "async-cache": "^1.1.0",
     "audio-loader": "^1.0.3",
     "audio-play": "^2.3.1",
     "firebase": "^9.2.0",
     "insert-css": "^2.0.0",
+    "lodash": "^4.17.21",
     "nanohtml": "^1.9.1",
     "nanomorph": "^5.4.3",
     "pretty-ms": "^7.0.1"

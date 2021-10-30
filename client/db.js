@@ -33,7 +33,7 @@ async function saveSession (userId, opts) {
   })
 }
 
-async function getSessions (db, userId) {
+async function getSessions (userId) {
   const sessionsCol = collection(db, `sessions_${userId}`)
   const sessionSnapshot = await getDocs(sessionsCol)
   const sessionList = sessionSnapshot.docs.map(doc => doc.data())
