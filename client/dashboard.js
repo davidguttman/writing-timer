@@ -16,7 +16,7 @@ const calendarHeatmap = require('@dguttman/calendar-heatmap')
 //   }
 // `)
 
-const estFinalCount = 480
+const estFinalCount = 200
 
 const style = {
   statRow: 'ph4 flex justify-between',
