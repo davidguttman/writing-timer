@@ -25,15 +25,15 @@ module.exports = {
   getSessions
 }
 
-async function saveSession () {
+async function saveSession (userId) {
   const datetime = new Date().toISOString()
-  await setDoc(doc(db, 'sessions', datetime), {
+  await setDoc(doc(db, `sessions_${userId}`, datetime), {
     datetime
   })
 }
 
-async function getSessions (db) {
-  const sessionsCol = collection(db, 'sessions')
+async function getSessions (db, userId) {
+  const sessionsCol = collection(db, `sessions_${userId}`)
   const sessionSnapshot = await getDocs(sessionsCol)
   const sessionList = sessionSnapshot.docs.map(doc => doc.data())
   return sessionList
