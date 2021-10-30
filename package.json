@@ -1,22 +1,26 @@
 {
-  "name": "tomato-timer",
+  "name": "writing-timer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "budo client/index.js --live -d public -- -p esmify"
+    "start": "budo client/index.js --live -d dist -- -p esmify",
+    "build": "browserify client/index.js -p esmify | terser -mc > dist/index.js"
   },
   "keywords": [],
   "author": "David Guttman <david@guttman.io> (http://davidguttman.com/)",
   "license": "MIT",
   "devDependencies": {
-    "budo": "^11.6.4"
+    "browserify": "^17.0.0",
+    "budo": "^11.6.4",
+    "esmify": "^2.1.1",
+    "standard": "^16.0.4",
+    "terser": "^5.9.0"
   },
   "dependencies": {
     "async-cache": "^1.1.0",
     "audio-loader": "^1.0.3",
     "audio-play": "^2.3.1",
-    "esmify": "^2.1.1",
     "firebase": "^9.2.0",
     "insert-css": "^2.0.0",
     "nanohtml": "^1.9.1",

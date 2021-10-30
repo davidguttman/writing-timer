@@ -6,24 +6,25 @@ const db = require('./db')
 const sounds = require('./sounds')
 const { getId, setId } = require('./user-id')
 
-// const SESSION_LENGTH = 25 * 60 * 1000
-const SESSION_LENGTH = 3 * 1000
+const SESSION_DURATION = 25 * 60 * 1000
+// const SESSION_DURATION = 3 * 1000
 
 const state = {
   mode: 'INACTIVE',
   timeStart: null,
   lastSound: null,
-  userId: getId()
+  userId: getId(),
+  sessionDuration: SESSION_DURATION
 }
 
 const tree = module.exports = render()
 
 function render () {
   const renderMode = {
-    'INACTIVE': renderStart,
-    'ACTIVE': renderTimer,
-    'FINISHED': renderClaim,
-    'OPTIONS': renderOptions
+    INACTIVE: renderStart,
+    ACTIVE: renderTimer,
+    FINISHED: renderClaim,
+    OPTIONS: renderOptions
   }[state.mode]
 
   return html`
@@ -58,16 +59,14 @@ function renderOptions () {
   return html`
     <div>
       <div>
-        <form action='#'>
-          <label class='white-90'>
-            Project ID
-            <input
-              type='text'
-              value=${state.userId}
-              class='tc input-reset bg-dark-gray white-90 mw5 pa2 ba b--black-20 mh3'
-              onchange=${onUserIdChange} />
-          </label>
-        </form>
+        <label class='white-90'>
+          Project ID
+          <input
+            type='text'
+            value=${state.userId}
+            class='tc input-reset bg-dark-gray white-90 mw5 pa2 ba b--black-20 mh3'
+            onchange=${onUserIdChange} />
+        </label>
       </div>
       <div class='ma4 dim pointer' onclick=${reset}>
         Back
@@ -79,7 +78,10 @@ function renderOptions () {
 function renderTimer () {
   return html`
     <span class='f-headline lh-solid border-box ph4 pv3 pointer grow code white bg-animate hover-bg-white hover-black' onclick=${reset}>
-      ${prettyMs(state.timeLeft, {colonNotation: true, secondsDecimalDigits: 0})}
+      ${prettyMs(state.timeLeft, {
+        colonNotation: true,
+        secondsDecimalDigits: 0
+      })}
     </span>
   `
 }
@@ -107,7 +109,7 @@ function tickLoop () {
   if (state.mode !== 'ACTIVE') return
 
   state.elapsed = Date.now() - state.timeStart
-  state.timeLeft = SESSION_LENGTH - state.elapsed
+  state.timeLeft = SESSION_DURATION - state.elapsed
 
   if (state.timeLeft <= 0) return finish()
 
@@ -132,13 +134,16 @@ function reset () {
 
 function finish () {
   state.mode = 'FINISHED'
-  state.timeStart = null
   update()
 }
 
 function claim () {
   sounds.ding()
-  db.saveSession(state.userId)
+  db.saveSession(state.userId, {
+    timeStart: state.timeStart,
+    timeClaimed: Date.now(),
+    duration: state.sessionDuration
+  })
   reset()
 }
 
@@ -153,6 +158,6 @@ function update () {
   morph(tree, render())
 }
 
-function blank () {
-  return html`<span />`
-}
+// function blank () {
+//   return html`<span />`
+// }

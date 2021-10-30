@@ -25,10 +25,11 @@ module.exports = {
   getSessions
 }
 
-async function saveSession (userId) {
+async function saveSession (userId, opts) {
   const datetime = new Date().toISOString()
   await setDoc(doc(db, `sessions_${userId}`, datetime), {
-    datetime
+    datetime,
+    ...opts
   })
 }
 
