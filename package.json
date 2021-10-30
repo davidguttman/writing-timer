@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "budo client/index.js --live -d dist -- -p esmify",
-    "build": "browserify client/index.js -p esmify | terser -mc > dist/index.js"
+    "build": "browserify client/index.js -p esmify | terser -mc > dist/index.js",
+    "build-app": "nativefier https://writing.guttman.io --inject app/app.css --title-bar-style 'hiddenInset'"
   },
   "keywords": [],
   "author": "David Guttman <david@guttman.io> (http://davidguttman.com/)",
@@ -14,6 +15,7 @@
     "browserify": "^17.0.0",
     "budo": "^11.6.4",
     "esmify": "^2.1.1",
+    "nativefier": "^45.0.4",
     "standard": "^16.0.4",
     "terser": "^5.9.0"
   },

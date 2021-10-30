@@ -54,6 +54,7 @@ function renderStart () {
     <a
       class='white-20 hover-white-50 pa2 cursor pointer no-underline'
       href='#/dashboard'
+      target='_blank'
       style='position: absolute; bottom: 0; left: 0'>
       Dashboard
     </a>
@@ -122,7 +123,7 @@ function tickLoop () {
   update()
   playTickSound()
 
-  window.requestAnimationFrame(tickLoop)
+  setTimeout(tickLoop, 50)
 }
 
 function playTickSound () {
