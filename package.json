@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "budo client/index.js --live -d public"
+    "start": "budo client/index.js --live -d public -- -p esmify"
   },
   "keywords": [],
   "author": "David Guttman <david@guttman.io> (http://davidguttman.com/)",
@@ -16,6 +16,8 @@
     "async-cache": "^1.1.0",
     "audio-loader": "^1.0.3",
     "audio-play": "^2.3.1",
+    "esmify": "^2.1.1",
+    "firebase": "^9.2.0",
     "insert-css": "^2.0.0",
     "nanohtml": "^1.9.1",
     "nanomorph": "^5.4.3",

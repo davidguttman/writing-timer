@@ -3,15 +3,15 @@ const morph = require('nanomorph')
 const prettyMs = require('pretty-ms')
 
 require('./style')
+const db = require('./db')
 const sounds = require('./sounds')
 
 const SESSION_LENGTH = 25 * 60 * 1000
-// const SESSION_LENGTH = 5 * 1000
+// const SESSION_LENGTH = 3 * 1000
 
 const state = {
   mode: 'INACTIVE',
   timeStart: null,
-  interval: null,
   lastSound: null
 }
 
@@ -102,6 +102,7 @@ function finish () {
 
 function claim () {
   sounds.ding()
+  db.saveSession()
   reset()
 }
 
