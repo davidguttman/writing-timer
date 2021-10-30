@@ -120,16 +120,17 @@ function tickLoop () {
 
   if (state.timeLeft <= 0) return finish()
 
-  update()
   playTickSound()
+  update()
 
   setTimeout(tickLoop, 50)
 }
 
 function playTickSound () {
-  state.lastSound = state.lastSound || Date.now() - 1000
-  if (Date.now() - state.lastSound <= 1000) return
-  state.lastSound = Date.now()
+  const now = Math.floor(Date.now() / 1000)
+  state.lastSound = state.lastSound || now
+  if (now === state.lastSound) return
+  state.lastSound = now
   sounds.tick()
 }
 
