@@ -51,6 +51,12 @@ function renderStart () {
       style='position: absolute; top: 0; right: 0'>
       Options
     </div>
+    <a
+      class='white-20 hover-white-50 pa2 cursor pointer no-underline'
+      href='#/dashboard'
+      style='position: absolute; top: 0; left: 0'>
+      Dashboard
+    </a>
   </div>
   `
 }
