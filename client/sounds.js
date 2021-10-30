@@ -9,7 +9,7 @@ const cache = new AsyncCache({
 })
 
 cache.get('/tick.wav', function () {})
-cache.get('/everquest.mp3', function () {})
+cache.get('/ding.mp3', function () {})
 
 module.exports = {
   tick,
@@ -23,9 +23,8 @@ function tick () {
   })
 }
 
-
 function ding () {
-  cache.get('/everquest.mp3', function (err, buf) {
+  cache.get('/ding.mp3', function (err, buf) {
     if (err) return console.error(err)
     play(buf)
   })
