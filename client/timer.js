@@ -53,7 +53,7 @@ function renderStart () {
     </div>
     <a
       class='white-20 hover-white-50 pa2 cursor pointer no-underline'
-      href='#/dashboard'
+      href='#/dashboard/${getId()}'
       target='_blank'
       style='position: absolute; bottom: 0; left: 0'>
       Dashboard

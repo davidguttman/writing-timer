@@ -16,7 +16,7 @@ function loadRoute () {
   const urlParts = url.split('/')
 
   if (!urlParts[0]) return timerRoute()
-  if (urlParts[0] === 'dashboard') return dashboardRoute()
+  if (urlParts[0] === 'dashboard') return dashboardRoute(urlParts.slice(1))
   if (urlParts[0] === 'fake') return fakeDataRoute()
 
   return notFound()
@@ -29,12 +29,12 @@ async function timerRoute () {
 
 async function dashboardRoute (id) {
   container.innerHTML = ''
-  const sessions = await db.getSessions(getId())
+  const sessions = await db.getSessions(id || getId())
   container.appendChild(dashboard(sessions))
 
   setInterval(async function () {
     container.innerHTML = ''
-    const sessions = await db.getSessions(getId())
+    const sessions = await db.getSessions(id || getId())
     container.appendChild(dashboard(sessions))
   }, 30 * 60 * 1000)
 }
