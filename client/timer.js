@@ -131,7 +131,7 @@ function playTickSound () {
   state.lastSound = state.lastSound || now
   if (now === state.lastSound) return
   state.lastSound = now
-  sounds.tick()
+  sounds.tick({ volume: 0.5 })
 }
 
 function reset () {

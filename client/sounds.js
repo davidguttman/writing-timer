@@ -16,16 +16,16 @@ module.exports = {
   ding
 }
 
-function tick () {
+function tick (opts) {
   cache.get('/tick.wav', function (err, buf) {
     if (err) return console.error(err)
-    play(buf)
+    play(buf, opts)
   })
 }
 
-function ding () {
+function ding (opts) {
   cache.get('/ding.mp3', function (err, buf) {
     if (err) return console.error(err)
-    play(buf)
+    play(buf, opts)
   })
 }
